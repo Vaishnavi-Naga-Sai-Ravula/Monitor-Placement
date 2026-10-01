@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Quick solver check",
+      "type": "process",
+      "command": "python",
+      "args": ["self_check.py", "--adapter", "adapters.mine:MySolver"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Full public benchmark",
+      "type": "process",
+      "command": "python",
+      "args": ["run.py", "--adapter", "adapters.mine:MySolver", "--out", "benchmarks/local_report.json"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "group": {"kind": "test", "isDefault": true}
+    },
+    {
+      "label": "Correctness tests",
+      "type": "process",
+      "command": "python",
+      "args": ["-m", "unittest", "discover", "-s", "tests", "-v"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Create visual demo",
+      "type": "process",
+      "command": "python",
+      "args": ["demo.py"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    }
+  ]
+}

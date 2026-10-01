@@ -1,0 +1,52 @@
+{
+  "instance": "monitors-01",
+  "baseline_plan": {
+    "sites": [
+      4,
+      1,
+      0,
+      11
+    ]
+  },
+  "baseline_cost": 3376935,
+  "solver_plan": {
+    "sites": [
+      25,
+      23,
+      3,
+      20
+    ]
+  },
+  "solver_cost": 2965159,
+  "history": [
+    [
+      0.000107,
+      3497502
+    ],
+    [
+      0.003749,
+      3376935
+    ],
+    [
+      0.00483,
+      3350610
+    ],
+    [
+      0.00611,
+      3167050
+    ],
+    [
+      0.012095,
+      3154201
+    ],
+    [
+      0.02311,
+      3040287
+    ],
+    [
+      0.024191,
+      2965159
+    ]
+  ],
+  "note": "Direct visual-demo run; use run.py for benchmark scoring."
+}

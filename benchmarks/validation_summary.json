@@ -1,0 +1,18 @@
+{
+  "tested_on": "2026-10-01",
+  "python": "3.13",
+  "platform": "Windows",
+  "public_cases": 6,
+  "matched_final_reference_targets": 6,
+  "total_score": 99.61071385805523,
+  "rejected": 0,
+  "crashes": 0,
+  "overruns": 0,
+  "unit_tests_passed": 5,
+  "upstream_original_files": 23,
+  "changed_upstream_files": [
+    "README.md",
+    "benchkit/runner.py"
+  ],
+  "private_judging_verified": false
+}
