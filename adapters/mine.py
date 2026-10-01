@@ -1,4 +1,4 @@
-"""Sparse greedy construction, repeated fast swaps, and perturbed restarts.
+"""Sparse greedy construction, cached swap descent, and perturbed restarts.
 
 Only valid site selections are submitted. There are no third-party dependencies,
 instance-name checks, reference-cost lookups, or changes to the evaluator.
@@ -27,17 +27,19 @@ def _best_swap(benefits, opened, near, second, owner, deadline):
             continue
         gain, loss = 0, removal_loss.copy()
         for point, value in covered:
-            first, runner_up = near[point], second[point]
-            pos = owner[point]
+            runner_up = second[point]
+            if value <= runner_up:
+                continue
+            first, pos = near[point], owner[point]
             if value > first:
                 gain += value - first
                 loss[pos] -= first - runner_up
-            elif value > runner_up:
+            else:
                 loss[pos] -= value - runner_up
-        pos = min(range(k), key=loss.__getitem__)
-        change = loss[pos] - gain
+        minimum = min(loss)
+        change = minimum - gain
         if change < best_delta:
-            best_delta, best_swap = change, (pos, site)
+            best_delta, best_swap = change, (loss.index(minimum), site)
     return best_delta, best_swap
 
 
@@ -93,8 +95,15 @@ class MySolver(Solver):
                     near[point] = value
         keep(opened, base_cost - sum(near))
 
+        local_minima = set()
+
         def descend(opened):
             while time.perf_counter() < deadline:
+                state = frozenset(opened)
+                # An already completed neighborhood has no improving exchange,
+                # even if the same selected sites now have a different order.
+                if state in local_minima:
+                    return
                 near = [0] * instance.size
                 second = [0] * instance.size
                 owner = [0] * instance.size
@@ -111,6 +120,9 @@ class MySolver(Solver):
                 best_delta, best_swap = _best_swap(
                     benefits, opened, near, second, owner, deadline)
                 if best_swap is None:
+                    # A timed-out scan does not prove local optimality.
+                    if time.perf_counter() < deadline:
+                        local_minima.add(state)
                     return
                 pos, s = best_swap
                 opened[pos] = s

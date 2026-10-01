@@ -15,11 +15,22 @@
     "benchkit/runner.py"
   ],
   "private_judging_verified": false,
-  "consecutive_full_public_runs": 2,
+  "consecutive_full_public_runs": 3,
   "matched_reference_at_all_checkpoints": true,
-  "solver": "sparse population-weighted savings with greedy and swap search",
+  "solver": "sparse weighted savings with cached local-optimum descent and perturbed restarts",
   "reports": [
     "benchmarks/public_report.json",
-    "benchmarks/public_repeat_report.json"
+    "benchmarks/public_repeat_report.json",
+    "benchmarks/public_consistency_report.json"
+  ],
+  "consistency_run_scores": [
+    100.0,
+    100.0,
+    100.0
+  ],
+  "monitors_04_first_reference_seconds": [
+    0.119554,
+    0.069859,
+    0.069008
   ]
 }

@@ -1,6 +1,8 @@
 # Original source and compatibility
 
-Source: [public Monitor Placement bundle](https://github.com/Vaishnavi-Naga-Sai-Ravula/Algo-Ranabhoomi-Phase_1/tree/main/monitors), retrieved on 1 October 2026. All 23 original source files are included. `upstream/source_manifest.json` records their original SHA-256 hashes.
+Source: [public Monitor Placement bundle](https://github.com/Vaishnavi-Naga-Sai-Ravula/Algo-Ranabhoomi-Phase_1/tree/main/monitors), retrieved on 1 October 2026. All 23 original source files are included. `upstream/source_manifest.json` records their original SHA-256 hashes. Hash verification normalizes CRLF to LF
+before calculating SHA-256, so native Windows Git checkouts verify consistently.
+Each manifest entry records this line-ending convention.
 
 The supplied files `data.py`, `validator.py`, `public_reference.json`, the
 starter/baseline, and all scoring/anchor/timing code are unchanged. The added

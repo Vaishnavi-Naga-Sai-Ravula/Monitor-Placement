@@ -25,7 +25,8 @@ The algorithm is a search heuristic for a facility-location problem. It does not
    households a candidate rooftop covers. Uncovered households have zero savings
    and do not need repeated evaluation during the search.
 3. Build a stronger selection greedily: repeatedly add the rooftop that reduces the population-weighted cost most.
-4. Improve it with swaps: replace one selected rooftop with one unselected rooftop whenever this reduces the cost. Repeat rather than stopping after the baseline's single swap.
+4. Improve it with swaps: replace one selected rooftop with one unselected rooftop whenever this reduces the cost. Repeat rather than stopping after the baseline's single swap. Remember
+   completed local optima so revisiting the same site selection avoids a repeated scan.
 5. Use small, general randomized changes to explore other selections, then repeat the swap search. Keep and submit the best answer found so far.
 6. Stop before the deadline and return the best selection.
 
@@ -80,7 +81,10 @@ The submission entry point is `adapters.mine:MySolver`: the part before the colo
 1. Extract or open the complete submission folder in VS Code with **File → Open Folder**.
 2. Open **Terminal → New Terminal**. Run commands from the `Monitor-Placement` folder containing `run.py`; do not run from its parent directory.
 3. Check the interpreter with `python --version`. If that command is unavailable on Windows, try `py --version`. The project uses only Python's standard library.
-4. Run the quick check, then the full public benchmark:
+4. Run each command once and wait for it to finish before starting the next.
+   Use the terminal commands or configured tasks: the generic Run button does
+   not pass `--adapter`, so it evaluates the starter by default. Run the quick
+   check, then the full public benchmark:
 
 ```text
 python self_check.py --adapter adapters.mine:MySolver

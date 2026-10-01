@@ -11,6 +11,9 @@ result, not a guaranteed private judging score.
 The search uses sparse population-weighted savings: households outside a
 candidate's coverage have zero savings and need no repeated evaluation. This
 keeps the exact objective while finding strong plans before the first checkpoint.
+Completed local optima are cached, so random restarts skip repeated scans of the
+same site selection. The measured public score is recomputed on each run and
+can vary with CPU availability; it is not a fixed or guaranteed score.
 
 - Start with [START_HERE.md](START_HERE.md) for the problem, algorithm, VS Code,
   and GitHub submission steps.

@@ -3,138 +3,161 @@
     "path": "_paths.py",
     "original_sha256": "E17A17764D024CDBCE2B2145F5741F88321449180892864AB4117678A3CFDACA",
     "included_sha256": "E17A17764D024CDBCE2B2145F5741F88321449180892864AB4117678A3CFDACA",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "adapter.py",
     "original_sha256": "21ECF2BE62BAB5B86400084CBB0A3DE311D11D067BBFEB07DD1AD979B71B3F9C",
     "included_sha256": "21ECF2BE62BAB5B86400084CBB0A3DE311D11D067BBFEB07DD1AD979B71B3F9C",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "data.py",
     "original_sha256": "36EB7484ABE143D4402733C70CA82E4EFD912C976E42061C5435C4B179D36372",
     "included_sha256": "36EB7484ABE143D4402733C70CA82E4EFD912C976E42061C5435C4B179D36372",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "metrics.py",
     "original_sha256": "2D3EE07AA8CC5CC9459C5364AB2F6015BC2A483B308E09B282EC7DDBA6BB27B6",
     "included_sha256": "2D3EE07AA8CC5CC9459C5364AB2F6015BC2A483B308E09B282EC7DDBA6BB27B6",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "public_reference.json",
     "original_sha256": "3988D530E1408154AE01C4D9B1FDA421F078DA0838E073D7FBD181FE398257C3",
     "included_sha256": "3988D530E1408154AE01C4D9B1FDA421F078DA0838E073D7FBD181FE398257C3",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "README.md",
     "original_sha256": "3B342542272EC00D558092133054671587BA681E49661E438560B18CDA7A1536",
-    "included_sha256": "38B4231A255C7A2F799375917B6C65A63B6771103DAE33C47A796B1FF1313E6D",
-    "unchanged": false
+    "included_sha256": "0A58537313B5896D6B5F44369856C7CA455D175FB6F1100AD12B47E04A3AF806",
+    "unchanged": false,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "run.py",
     "original_sha256": "574A6C6F9ED238C2E87FD3ED11C13A04B73BCAEDC931A910D5D38DADF1736AF9",
     "included_sha256": "574A6C6F9ED238C2E87FD3ED11C13A04B73BCAEDC931A910D5D38DADF1736AF9",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "SECURITY.md",
     "original_sha256": "6C3A5A6CB9D0D86E0670E4AAEC328754897766766EB0DAE9E355887A1E22D5B2",
     "included_sha256": "6C3A5A6CB9D0D86E0670E4AAEC328754897766766EB0DAE9E355887A1E22D5B2",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "self_check.py",
     "original_sha256": "056CAC0803367836BE932762E3402C428E58372DE74B2342DEF942166CC4E266",
     "included_sha256": "056CAC0803367836BE932762E3402C428E58372DE74B2342DEF942166CC4E266",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "validator.py",
     "original_sha256": "8FDC1066FEBDFA39B8210C8627E7259353C3CAD27F1B4FE4623DFE851E9B05BB",
     "included_sha256": "8FDC1066FEBDFA39B8210C8627E7259353C3CAD27F1B4FE4623DFE851E9B05BB",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "adapters/__init__.py",
     "original_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
     "included_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "adapters/baseline.py",
     "original_sha256": "1308F8CAEC17F8F67299BAFFB3FB083C73B4E4C38F03F3BF83DE6AD77213BB84",
     "included_sha256": "1308F8CAEC17F8F67299BAFFB3FB083C73B4E4C38F03F3BF83DE6AD77213BB84",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "adapters/starter.py",
     "original_sha256": "D7149072ACB136CC2D39406DB8858EEF50A84B299662DF05706B1B177E71EE5E",
     "included_sha256": "D7149072ACB136CC2D39406DB8858EEF50A84B299662DF05706B1B177E71EE5E",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/__init__.py",
     "original_sha256": "CF16403D4535DACEB39A5DB506CE499B32BFCD1262226DF04650B4C00D20DA43",
     "included_sha256": "CF16403D4535DACEB39A5DB506CE499B32BFCD1262226DF04650B4C00D20DA43",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/aggregate.py",
     "original_sha256": "A98FD972156C5DB45742E10FE4A52C97034D63F31BCD6137B8FC19495698055F",
     "included_sha256": "A98FD972156C5DB45742E10FE4A52C97034D63F31BCD6137B8FC19495698055F",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/anchors.py",
     "original_sha256": "31077DFA5A75EDF0A39D2B71D7F9282DAF03A4912335F54C6DBC97972FF59623",
     "included_sha256": "31077DFA5A75EDF0A39D2B71D7F9282DAF03A4912335F54C6DBC97972FF59623",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/budget.py",
     "original_sha256": "33801CEA7F89703B8A84E3B79CDC6E0B3B030F6817C4B6B895E8C2CD4DAA0397",
     "included_sha256": "33801CEA7F89703B8A84E3B79CDC6E0B3B030F6817C4B6B895E8C2CD4DAA0397",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/cli.py",
     "original_sha256": "84604D9CC0D2F5EAECEF5CB32DF9657D361159BC6E170E2CD66FB95E83C2B028",
     "included_sha256": "84604D9CC0D2F5EAECEF5CB32DF9657D361159BC6E170E2CD66FB95E83C2B028",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/loader.py",
     "original_sha256": "C0AF88D3D9F69B7CE3FB27C7E6B0407BFB231832558A33618D616D6B69385ECB",
     "included_sha256": "C0AF88D3D9F69B7CE3FB27C7E6B0407BFB231832558A33618D616D6B69385ECB",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/report.py",
     "original_sha256": "807D083EAD9A03E2B9C29970C26A9DDFAFB01D5553A2207F4FCB0A9A35EAD272",
     "included_sha256": "807D083EAD9A03E2B9C29970C26A9DDFAFB01D5553A2207F4FCB0A9A35EAD272",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/rng.py",
     "original_sha256": "476900E9BEDE2069BAE2103DDF5DA8A6FA7A04EE416307F26DFC562FFC6521CB",
     "included_sha256": "476900E9BEDE2069BAE2103DDF5DA8A6FA7A04EE416307F26DFC562FFC6521CB",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/runner.py",
     "original_sha256": "084E472C238127EC443F1113C3D955F5AB3BF55432953A5B98EE2C75F0F3161E",
     "included_sha256": "2186BCF0D629B5C5B2F18B4DFCFB218F99DB610237F2FAF6CE99CF444A1432E2",
-    "unchanged": false
+    "unchanged": false,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   },
   {
     "path": "benchkit/scoring.py",
     "original_sha256": "C8063AE042838753F6AE94494AEA38DF05133C7C9BB804F920AA590384008399",
     "included_sha256": "C8063AE042838753F6AE94494AEA38DF05133C7C9BB804F920AA590384008399",
-    "unchanged": true
+    "unchanged": true,
+    "hash_line_endings": "LF (CRLF normalized to LF)"
   }
 ]
