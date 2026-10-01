@@ -1,11 +1,12 @@
 """Small exact cases check validity, weights, cutoff semantics, and time fallback."""
 import itertools
+import random
 import time
 import unittest
 from dataclasses import replace
 from types import MappingProxyType
 
-from adapters.mine import MySolver
+from adapters.mine import MySolver, _best_swap
 from data import Instance, compute_digest, effective_table
 from validator import validate
 
@@ -69,6 +70,53 @@ class SolverTests(unittest.TestCase):
         plan, cost = self.solve_and_check(item, seconds=-1)
         self.assertEqual(plan['sites'], [0])
         self.assertEqual(cost, 100)
+
+    def test_sparse_exchange_matches_every_brute_force_neighbor(self):
+        # Independently validate every exchange, including ties, zero weights,
+        # uncovered points and replacements covering a removed site's demand.
+        rng = random.Random(728)
+        for trial in range(40):
+            item = instance(
+                [(rng.randrange(9), rng.randrange(9)) for _ in range(7)],
+                [rng.randrange(6) for _ in range(7)],
+                [(rng.randrange(9), rng.randrange(9)) for _ in range(6)],
+                1 + trial % 4, radius=3, penalty=15)
+            table = effective_table(item)
+            benefits = [[] for _ in item.sites]
+            for point, (weight, row) in enumerate(zip(item.weights, table)):
+                for site, distance in enumerate(row):
+                    value = weight * (item.penalty - distance)
+                    if value > 0:
+                        benefits[site].append((point, value))
+            opened = rng.sample(range(len(item.sites)), item.k)
+            near, second, owner = [], [], []
+            for weight, row in zip(item.weights, table):
+                ranked = sorted(
+                    ((weight * (item.penalty - row[site]), pos)
+                     for pos, site in enumerate(opened)),
+                    key=lambda value: (-value[0], value[1]))
+                near.append(ranked[0][0])
+                second.append(ranked[1][0] if item.k > 1 else 0)
+                owner.append(ranked[0][1])
+            before = validate(item, {'sites': opened})[0]
+            best_cost = before
+            for pos in range(item.k):
+                for site in range(len(item.sites)):
+                    if site not in opened:
+                        neighbor = list(opened)
+                        neighbor[pos] = site
+                        best_cost = min(best_cost, validate(item, {'sites': neighbor})[0])
+            delta, swap = _best_swap(
+                benefits, opened, near, second, owner, float('inf'))
+            with self.subTest(trial=trial):
+                self.assertEqual(before + delta, best_cost)
+                if swap is None:
+                    self.assertEqual(best_cost, before)
+                else:
+                    pos, site = swap
+                    neighbor = list(opened)
+                    neighbor[pos] = site
+                    self.assertEqual(validate(item, {'sites': neighbor})[0], best_cost)
 
 
 if __name__ == '__main__':

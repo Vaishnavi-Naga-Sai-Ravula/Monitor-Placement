@@ -1,8 +1,9 @@
 # Monitor Placement: beginner guide and submission notes
 
 The solution is already implemented in `adapters/mine.py`. It matched all six
-published final reference costs and scored **99.61/100** on the included full
-local public run. Start by opening `demo.html`, then run the commands below.
+published reference costs at every checkpoint and scored **100/100** on the included full
+local public run. This is a measured public result, not a guarantee for the private
+judge. Start by opening `demo.html`, then run the commands below.
 Read `BENCHMARKS.md` for measured results and limitations.
 
 ## What the program solves
@@ -20,7 +21,9 @@ The cutoff matters: with `D = 100`, `P = 300`, and population `10`, integer dist
 The algorithm is a search heuristic for a facility-location problem. It does not need a trained AI model, internet access, an API key, or third-party Python packages.
 
 1. Submit an immediately valid selection so that there is an answer before the first scoring checkpoint.
-2. Precompute the charged distance from every household to every candidate rooftop.
+2. Precompute charged distances and store population-weighted savings only for
+   households a candidate rooftop covers. Uncovered households have zero savings
+   and do not need repeated evaluation during the search.
 3. Build a stronger selection greedily: repeatedly add the rooftop that reduces the population-weighted cost most.
 4. Improve it with swaps: replace one selected rooftop with one unselected rooftop whenever this reduces the cost. Repeat rather than stopping after the baseline's single swap.
 5. Use small, general randomized changes to explore other selections, then repeat the swap search. Keep and submit the best answer found so far.
@@ -123,15 +126,18 @@ If Git is installed and you prefer VS Code:
 
 If the organizers request only an adapter file, submit the solver file rather than assuming that uploading a new repository completes registration. If they request a fork or pull request, follow that workflow. The problem statement does not specify an event-specific registration form or upload destination.
 
-The prepared local folder has a Git repository on branch `codex/monitor-placement`.
-The ZIP contains the source and reports without Git history or Python cache files.
-If you extract the ZIP, initialize a repository before publishing from VS Code.
-For an existing empty GitHub repository, you can also use these commands, replacing
-the sample remote URL with your own repository's URL:
+The local folder uses branch `main` and is connected to
+[your Monitor-Placement repository](https://github.com/Vaishnavi-Naga-Sai-Ravula/Monitor-Placement).
+For later changes, review `git status`, stage the intended files, commit them,
+then run `git push`. Local benchmark reruns named `benchmarks/local_*.json` are
+ignored; the included reproducible report is `benchmarks/public_report.json`.
+
+For a separate empty GitHub repository, use these commands after committing the
+project, replacing the sample remote URL with that repository's URL:
 
 ```text
 git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-git push -u origin codex/monitor-placement
+git push -u origin main
 ```
 
 Create the remote repository without an initial README, license, or `.gitignore`

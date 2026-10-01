@@ -4,9 +4,13 @@
 
 This folder contains the complete public problem bundle plus an improved solver
 in `adapters/mine.py` (`adapters.mine:MySolver`). On the included local public run,
-the solver matched **all six final reference costs** and scored **99.61/100**.
+the solver matched **all six reference costs at every checkpoint** and scored **100/100**.
 There were no rejected candidates, crashes, or overruns. This is a local public
 result, not a guaranteed private judging score.
+
+The search uses sparse population-weighted savings: households outside a
+candidate's coverage have zero savings and need no repeated evaluation. This
+keeps the exact objective while finding strong plans before the first checkpoint.
 
 - Start with [START_HERE.md](START_HERE.md) for the problem, algorithm, VS Code,
   and GitHub submission steps.

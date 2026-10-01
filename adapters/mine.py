@@ -1,4 +1,4 @@
-"""Greedy construction, repeated fast swaps, and perturbed restarts.
+"""Sparse greedy construction, repeated fast swaps, and perturbed restarts.
 
 Only valid site selections are submitted. There are no third-party dependencies,
 instance-name checks, reference-cost lookups, or changes to the evaluator.
@@ -9,6 +9,36 @@ import time
 from adapter import Solver, dist_table
 
 SAFETY_SECONDS = 0.20
+
+
+def _best_swap(benefits, opened, near, second, owner, deadline):
+    """Find the best exchange using only nonzero population-weighted savings."""
+    k = len(opened)
+    selected = set(opened)
+    removal_loss = [0] * k
+    for first, runner_up, pos in zip(near, second, owner):
+        removal_loss[pos] += first - runner_up
+
+    best_delta, best_swap = 0, None
+    for site, covered in enumerate(benefits):
+        if time.perf_counter() >= deadline:
+            return 0, None
+        if site in selected:
+            continue
+        gain, loss = 0, removal_loss.copy()
+        for point, value in covered:
+            first, runner_up = near[point], second[point]
+            pos = owner[point]
+            if value > first:
+                gain += value - first
+                loss[pos] -= first - runner_up
+            elif value > runner_up:
+                loss[pos] -= value - runner_up
+        pos = min(range(k), key=loss.__getitem__)
+        change = loss[pos] - gain
+        if change < best_delta:
+            best_delta, best_swap = change, (pos, site)
+    return best_delta, best_swap
 
 
 class MySolver(Solver):
@@ -24,12 +54,16 @@ class MySolver(Solver):
         table = dist_table(instance)
         weights = instance.weights
         rng = random.Random(12345)
-
-        def cost_of(opened):
-            return sum(w * min(row[s] for s in opened)
-                       for w, row in zip(weights, table))
-
-        incumbent_cost = cost_of(incumbent)
+        # An uncovered household pays the penalty regardless of this site.
+        # Store only actual savings, so it costs no work inside each search pass.
+        benefits = [[] for _ in range(m)]
+        for point, (weight, row) in enumerate(zip(weights, table)):
+            for site, distance in enumerate(row):
+                value = weight * (instance.penalty - distance)
+                if value > 0:
+                    benefits[site].append((point, value))
+        base_cost = instance.penalty * sum(weights)
+        incumbent_cost = receipt["cost"]
 
         def keep(opened, cost):
             nonlocal incumbent, incumbent_cost
@@ -39,57 +73,43 @@ class MySolver(Solver):
 
         # Greedy: add the candidate with the largest reduction in total cost.
         opened = []
-        near = [instance.penalty] * instance.size
+        near = [0] * instance.size
+        selected = set()
         for _ in range(k):
-            best_site, best_cost = None, float("inf")
-            for s in range(m):
+            best_site, best_gain = None, -1
+            for s, covered in enumerate(benefits):
                 if time.perf_counter() >= deadline:
                     return {"sites": incumbent}
-                if s in opened:
+                if s in selected:
                     continue
-                cost = sum(w * (row[s] if row[s] < d else d)
-                           for w, row, d in zip(weights, table, near))
-                if cost < best_cost:
-                    best_cost, best_site = cost, s
+                gain = sum(value - near[point] for point, value in covered
+                           if value > near[point])
+                if gain > best_gain:
+                    best_gain, best_site = gain, s
             opened.append(best_site)
-            near = [min(d, row[best_site]) for d, row in zip(near, table)]
-        keep(opened, sum(w * d for w, d in zip(weights, near)))
+            selected.add(best_site)
+            for point, value in benefits[best_site]:
+                if value > near[point]:
+                    near[point] = value
+        keep(opened, base_cost - sum(near))
 
         def descend(opened):
             while time.perf_counter() < deadline:
-                selected = set(opened)
-                near, second, owner = [], [], []
-                for row in table:
-                    best, nxt, own = instance.penalty, instance.penalty, 0
-                    for pos, s in enumerate(opened):
-                        d = row[s]
-                        if d < best:
-                            best, nxt, own = d, best, pos
-                        elif d < nxt:
-                            nxt = d
-                    near.append(best)
-                    second.append(nxt)
-                    owner.append(own)
-                cost = sum(w * d for w, d in zip(weights, near))
+                near = [0] * instance.size
+                second = [0] * instance.size
+                owner = [0] * instance.size
+                for pos, s in enumerate(opened):
+                    for point, value in benefits[s]:
+                        if value > near[point]:
+                            second[point] = near[point]
+                            near[point] = value
+                            owner[point] = pos
+                        elif value > second[point]:
+                            second[point] = value
+                cost = base_cost - sum(near)
                 keep(opened, cost)
-                best_delta, best_swap = 0, None
-                for s in range(m):
-                    if time.perf_counter() >= deadline:
-                        return
-                    if s in selected:
-                        continue
-                    # Common gain from opening s, plus each owner's removal loss.
-                    delta, loss = 0, [0] * k
-                    for row, w, a, b, own in zip(table, weights, near, second, owner):
-                        d = row[s]
-                        if d < a:
-                            delta += w * (d - a)
-                        else:
-                            loss[own] += w * ((d if d < b else b) - a)
-                    pos = min(range(k), key=loss.__getitem__)
-                    change = delta + loss[pos]
-                    if change < best_delta:
-                        best_delta, best_swap = change, (pos, s)
+                best_delta, best_swap = _best_swap(
+                    benefits, opened, near, second, owner, deadline)
                 if best_swap is None:
                     return
                 pos, s = best_swap

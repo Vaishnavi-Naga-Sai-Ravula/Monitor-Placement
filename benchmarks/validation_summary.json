@@ -1,18 +1,25 @@
 {
   "tested_on": "2026-10-01",
-  "python": "3.13",
+  "python": "3.13.7",
   "platform": "Windows",
   "public_cases": 6,
   "matched_final_reference_targets": 6,
-  "total_score": 99.61071385805523,
+  "total_score": 100.0,
   "rejected": 0,
   "crashes": 0,
   "overruns": 0,
-  "unit_tests_passed": 5,
+  "unit_tests_passed": 6,
   "upstream_original_files": 23,
   "changed_upstream_files": [
     "README.md",
     "benchkit/runner.py"
   ],
-  "private_judging_verified": false
+  "private_judging_verified": false,
+  "consecutive_full_public_runs": 2,
+  "matched_reference_at_all_checkpoints": true,
+  "solver": "sparse population-weighted savings with greedy and swap search",
+  "reports": [
+    "benchmarks/public_report.json",
+    "benchmarks/public_repeat_report.json"
+  ]
 }
